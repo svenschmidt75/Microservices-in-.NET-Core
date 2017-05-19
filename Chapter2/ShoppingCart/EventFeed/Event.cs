@@ -1,5 +1,4 @@
-
-using System;
+﻿using System;
 
 namespace ShoppingCart.EventFeed
 {
@@ -10,11 +9,7 @@ namespace ShoppingCart.EventFeed
         public string Name { get; }
         public object Content { get; }
 
-        public Event(
-          long sequenceNumber,
-          DateTimeOffset occuredAt,
-          string name,
-          object content)
+        public Event(long sequenceNumber, DateTimeOffset occuredAt, string name, object content)
         {
             this.SequenceNumber = sequenceNumber;
             this.OccuredAt = occuredAt;

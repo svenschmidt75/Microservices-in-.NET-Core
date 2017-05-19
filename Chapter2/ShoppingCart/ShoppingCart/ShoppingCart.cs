@@ -6,10 +6,15 @@ namespace ShoppingCart.ShoppingCart
 {
     public class ShoppingCart
     {
-        private HashSet<ShoppingCartItem> items = new HashSet<ShoppingCartItem>();
+        private readonly HashSet<ShoppingCartItem> items = new HashSet<ShoppingCartItem>();
 
         public int UserId { get; }
-        public IEnumerable<ShoppingCartItem> Items { get { return items; } }
+        
+        public IEnumerable<ShoppingCartItem> Items => items;
+
+        public ShoppingCart()
+        {
+        }
 
         public ShoppingCart(int userId)
         {
@@ -19,8 +24,10 @@ namespace ShoppingCart.ShoppingCart
         public void AddItems(IEnumerable<ShoppingCartItem> shoppingCartItems, IEventStore eventStore)
         {
             foreach (var item in shoppingCartItems)
+            {
                 if (this.items.Add(item))
                     eventStore.Raise("ShoppingCartItemAdded", new { UserId, item });
+            }
         }
 
         public void RemoveItems(int[] productCatalogueIds, IEventStore eventStore)
