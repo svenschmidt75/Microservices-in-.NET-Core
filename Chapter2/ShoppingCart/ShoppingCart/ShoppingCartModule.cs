@@ -18,7 +18,7 @@ namespace ShoppingCart.ShoppingCart
                  async (parameters, _) =>
                  {
                      var productcatalogIds = this.Bind<int[]>();
-                     var userId = (int) parameters.userid;
+                     int userId = (int) parameters.userid;
                      var shoppingCart = shoppingCartStore.Get(userId);
                      var shoppingCartItems = await
                                                  productcatalog
@@ -32,7 +32,7 @@ namespace ShoppingCart.ShoppingCart
             Delete("/{userid:int}/items", parameters =>
                                           {
                                               var productCatalogIds = this.Bind<int[]>();
-                                              var userId = (int) parameters.userid;
+                                              int userId = (int) parameters.userid;
                                               var shoppingCart = shoppingCartStore.Get(userId);
                                               shoppingCart.RemoveItems(productCatalogIds, eventStore);
                                               shoppingCartStore.Save(shoppingCart);
